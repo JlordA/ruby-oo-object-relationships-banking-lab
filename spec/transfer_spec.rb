@@ -1,10 +1,10 @@
 require 'pry'
 describe 'Transfer' do
 
-  let(:avi) { BankAccount.new("Avi") }
+  let(:avi) { BankAccount.new("Avi") }  #just the name 
   let(:amanda) { BankAccount.new("Amanda") }
   let(:terrance) { BankAccount.new("Terrance") }
-  let(:transfer) { Transfer.new(amanda, avi, 50) }
+  let(:transfer) { Transfer.new(amanda, avi, 50) } #3 items, amada, avi, amount 
   let(:bad_transfer) { Transfer.new(amanda, avi, 4000) }
 
   describe 'initialize' do
@@ -47,24 +47,24 @@ describe 'Transfer' do
   end
 
   describe '#execute_transaction' do
-    let(:avi) { BankAccount.new("Avi") }
-    let(:amanda) { BankAccount.new("Amanda") }
+    let(:avi) { BankAccount.new("Avi") }  #1000
+    let(:amanda) { BankAccount.new("Amanda") } #1000 
     let(:transfer) { Transfer.new(amanda, avi, 50) }
     let(:bad_transfer) { Transfer.new(amanda, avi, 4000) }
 
     it "can execute a successful transaction between two accounts" do
-      transfer.execute_transaction
+      transfer.execute_transaction  
       expect(amanda.balance).to eq(950)
       expect(avi.balance).to eq(1050)
       expect(transfer.status).to eq("complete")
     end
 
     it "each transfer can only happen once" do
-      transfer.execute_transaction
+      transfer.execute_transaction # frist run
       expect(amanda.balance).to eq(950)
       expect(avi.balance).to eq(1050)
       expect(transfer.status).to eq("complete")
-      transfer.execute_transaction
+      transfer.execute_transaction  # 2nd run
       expect(amanda.balance).to eq(950)
       expect(avi.balance).to eq(1050)
     end
